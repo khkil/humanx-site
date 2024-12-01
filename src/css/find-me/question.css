@@ -1,0 +1,52 @@
+.findme__question__explanation {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(126, 126, 126, 1);
+  margin: 0 0 12px;
+}
+
+.findme__question__wrapper{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+.findme__question__element__label{
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.findme__question__element__option {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(32, 37, 40, 0.4);
+}
+
+.findme__question__element__options {
+  margin: 15px 0 24px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.findme__question__element__option-Checker {
+  width: 25px;
+  height: 25px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 2px solid rgba(188,190,190,1);
+}
+
+input {
+  display: none;
+}
+
+input:checked + .findme__question__element__option-Checker {
+  width: 27px;
+  height: 27px;
+  margin: 0;
+  border: 5px solid #009B92;
+}

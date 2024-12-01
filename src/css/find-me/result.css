@@ -1,0 +1,174 @@
+.findme__result__title {
+  font-family: GmarketSans, sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 1.45;
+  text-align: center;
+  color: #202528;
+}
+
+.findme__result__title--highlight {
+  font-family: GmarketSans, sans-serif;
+  color: var(--primary-blue);
+}
+
+.findme__result__illustration {
+  margin: 24px 0;
+}
+
+.findme__result__illustration__image {
+  display: block;
+  width: 164px;
+  margin: 0 auto;
+}
+
+.findme__result__illustration__explanation {
+  padding: 12px 0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.62;
+  color: #202528;
+  font-weight: bold;
+}
+
+
+.findme__result__detail {
+  background: rgba(32, 37, 40, 0.04);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+
+.findme__result__detail__element {
+  position: relative;
+  padding: 0 0 1em 15px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.83;
+  color: #202528;
+}
+
+.findme__result__detail__element:before {
+  position: absolute;
+  content:'';
+  background-color: #009B92;
+  left: 0;
+  top: .8em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+.findme__result__detail__element:last-child {
+  padding-bottom: 0;
+}
+
+
+.findme__result__pros-cons {
+  margin: 24px 0 0;
+  border: 1px solid rgba(32, 37, 40, 0.17);
+  border-radius: 12px;
+  padding: 32px 0 35px;
+}
+.findme__result__pros-cons__label {
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 26px;
+  color: #202528;
+}
+.findme__result__pros-cons__element {
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  color: #0057A5;
+}
+
+.findme__result__share{
+  /*margin: 55px 0;*/
+}
+
+.findme__result__share__label{
+  padding: 13px 0;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: #202528;
+}
+
+.findme__result__share__buttons{
+  padding: 8px 0;
+  text-align: center;
+}
+
+.findme__result__share__buttons--kakao,
+.findme__result__share__buttons--link{
+  width: 52px;
+  height: 52px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 5px 4px;
+}
+
+.findme__result__share__buttons--kakao img{
+  width: 100%;
+
+}
+
+.findme__result__share__buttons--link img{
+  width: 100%;
+}
+
+.findme__result__more{
+  margin-bottom: 42px;
+}
+
+.findme__result__more__text{
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #202528;
+}
+
+.findme__result__more__button {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  border: 1px solid #0057A5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #0057A5;
+  background-color: transparent;
+}
+
+.findme__result__back__button {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  border: 1px solid #0057A5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #0057A5;
+}
+

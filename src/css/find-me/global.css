@@ -1,0 +1,952 @@
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+:root {
+  --primary-blue: #0057a5;
+}
+
+button {
+  box-shadow: none;
+}
+
+/* FONTS */
+@font-face {
+  font-family: "GmarketSans";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+    format("woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+  font-weight: 700;
+}
+
+/* COMMON (COMPONENT) */
+
+/* wrapper */
+.findme__common__wrapper {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* toolbar */
+.findme__common__toolbar {
+  /* display: flex; */
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.findme__common__toolbar__previous-button {
+  border: none;
+  margin: -10px 0 0 -10px;
+  width: 78px;
+  height: 36px;
+  flex: none;
+  background-color: transparent;
+  color: rgba(32, 37, 40, 0.4);
+}
+
+.findme__common__toolbar__current-page {
+  flex: 1;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+  margin-top: -3px;
+  padding-bottom: 6px;
+}
+.findme__common__toolbar__current-page__number {
+  color: rgba(0, 155, 146, 1);
+  font-weight: 700;
+  padding-left: 6px;
+}
+
+/* next */
+.findme__common__next {
+  margin: 12px 0 17px;
+  width: 100%;
+  text-align: center;
+}
+.findme__common__next__button {
+  width: 138px;
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.findme__common__next__button--image {
+  vertical-align: middle;
+  width: 16px;
+  margin: 1px -2px 0 4px;
+}
+
+/* header */
+.findme__common__header {
+  width: 100%;
+  height: 60px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: -24px 0 12px;
+}
+
+.findme__common__header > img {
+  height: 24px;
+}
+
+/* footer */
+.findme__common__footer {
+  width: 100%;
+  padding: 50px 0 40px;
+  text-align: center;
+  margin-bottom: -24px;
+}
+
+.findme__common__footer__call {
+  font-size: 12px;
+  color: #202528;
+  font-weight: 300;
+}
+
+/* custom */
+.invalid-feedback-custom {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.findme__main__title {
+  font-family: GmarketSans, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin-top: 32px;
+  text-align: center;
+}
+.findme__main__subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: center;
+  padding: 10px;
+  color: #202528;
+}
+.findme__main__illustration {
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 12px 0 0;
+}
+.findme__main__illustration--icon {
+  vertical-align: middle;
+  margin-top: -3px;
+}
+.findme__main__illustration__text--ask {
+  font-size: 20px;
+  margin: 32px 0 28px;
+  font-weight: 600;
+}
+.findme__main__illustration--image {
+  width: 100%;
+  max-width: 156px;
+}
+.findme__main__illustration__text--answer {
+  font-size: 14px;
+  margin: 32px 0;
+  font-weight: 600;
+}
+.findme__main__start {
+  text-align: center;
+}
+.findme__main__start__button {
+  margin: 10px 0 16px;
+  background-color: var(--primary-blue);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.3;
+  padding: 4px 16px 8px;
+  height: 72px;
+  width: 314px;
+  border-radius: 36px;
+  border: none;
+}
+.findme__main__start__button__count {
+  font-size: 14px;
+  font-weight: 300;
+}
+.findme__main__start__disclaimer {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #7e7e7e;
+}
+.findme__main__logo__wrapper {
+  padding: 50px 0 30px;
+  text-align: center;
+}
+.findme__loading {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.findme__loading__text {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  color: #201b28;
+}
+.findme__loading__animation {
+  margin-top: 28px;
+  display: flex;
+  padding-right: 2px;
+}
+.findme__loading__animation--objet {
+  height: 8px;
+  width: 8px;
+  background-color: #201b28;
+  border-radius: 4px;
+  margin: 5px;
+  animation: bounceBall 1.2s ease-in-out infinite;
+}
+.objet--2 {
+  animation-delay: 0.2s;
+}
+.objet--3 {
+  animation-delay: 0.4s;
+}
+@keyframes bounceBall {
+  0%,
+  20%,
+  50%,
+  80%,
+  to {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-9px);
+  }
+  60% {
+    transform: translateY(-6px);
+  }
+}
+.findme__loading__explanation {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #201b28;
+}
+.findme__question__explanation {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #7e7e7e;
+  margin: 0 0 12px;
+}
+.findme__question__wrapper {
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+.findme__question__element__label {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.findme__question__element__option {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(32, 37, 40, 0.4);
+}
+.findme__question__element__options {
+  margin: 15px 0 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.findme__question__element__option-Checker {
+  width: 25px;
+  height: 25px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 2px solid #bcbebe;
+}
+input {
+  display: none;
+}
+input:checked + .findme__question__element__option-Checker {
+  width: 27px;
+  height: 27px;
+  margin: 0;
+  border: 5px solid #009b92;
+}
+.findme__info__select,
+.information_form {
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  justify-content: center;
+}
+.findme__info__select__label {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 0 8px;
+  text-align: left;
+}
+.findme__info__select__option {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 8px 0;
+  justify-content: space-between;
+}
+.findme__info__select__option__element {
+  min-width: calc(50% - 4px);
+  max-width: calc(50% - 4px);
+  flex: 1 1;
+}
+.findme__info__select__option__element input {
+  display: none;
+}
+.findme__info__select__option__button {
+  flex: 1 1;
+  width: 100%;
+  border: 1px solid rgba(32, 37, 40, 0.26);
+  border-radius: 8px;
+  height: 48px;
+  background-color: transparent;
+  color: rgba(32, 37, 40, 0.5);
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 9px;
+  transition: 0.25s ease-in-out;
+}
+.findme__info__select__option__button.big {
+  height: 73px;
+}
+input:checked + .findme__info__select__option__button {
+  background-color: #009b92;
+  border-color: #009b92;
+  color: #fff;
+}
+.findme__result__title {
+  font-family: GmarketSans, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.45;
+  text-align: center;
+  color: #202528;
+}
+.findme__result__title--highlight {
+  font-family: GmarketSans, sans-serif;
+  color: var(--primary-blue);
+}
+.findme__result__illustration {
+  margin: 24px 0;
+}
+.findme__result__illustration__image {
+  display: block;
+  width: 164px;
+  margin: 0 auto;
+}
+.findme__result__illustration__explanation {
+  padding: 12px 0;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.62;
+  color: #202528;
+  font-weight: 700;
+}
+.findme__result__detail {
+  background: rgba(32, 37, 40, 0.04);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+.findme__result__detail__element {
+  position: relative;
+  padding: 0 0 1em 15px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.83;
+  color: #202528;
+}
+.findme__result__detail__element:before {
+  position: absolute;
+  content: "";
+  background-color: #009b92;
+  left: 0;
+  top: 0.8em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+.findme__result__detail__element:last-child {
+  padding-bottom: 0;
+}
+.findme__result__pros-cons {
+  margin: 24px 0 0;
+  border: 1px solid rgba(32, 37, 40, 0.17);
+  border-radius: 12px;
+  padding: 32px 0 35px;
+}
+.findme__result__pros-cons__label {
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: #202528;
+}
+.findme__result__pros-cons__element {
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  color: #0057a5;
+}
+.findme__result__share__label {
+  padding: 13px 0;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: #202528;
+}
+.findme__result__share__buttons {
+  padding: 8px 0;
+  text-align: center;
+}
+.findme__result__share__buttons--kakao,
+.findme__result__share__buttons--link {
+  width: 52px;
+  height: 52px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 5px 4px;
+}
+.findme__result__share__buttons--kakao img,
+.findme__result__share__buttons--link img {
+  width: 100%;
+}
+.findme__result__more {
+  margin-bottom: 42px;
+}
+.findme__result__more__text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  color: #202528;
+}
+.findme__result__more__button {
+  color: #0057a5;
+  background-color: transparent;
+}
+.findme__result__back__button,
+.findme__result__more__button {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  border: 1px solid #0057a5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+.findme__result__back__button {
+  color: #fff;
+  background-color: #0057a5;
+}
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Noto Sans KR", sans-serif;
+}
+body {
+  max-width: 480px;
+  margin: 0 auto;
+}
+:root {
+  --primary-blue: #0057a5;
+}
+button {
+  box-shadow: none;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff)
+    format("woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff)
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url(https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff)
+    format("woff");
+  font-weight: 700;
+}
+.findme__common__wrapper {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.findme__common__toolbar {
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+.findme__common__toolbar__previous-button {
+  border: none;
+  margin: -10px 0 0 -10px;
+  width: 78px;
+  height: 36px;
+  flex: none;
+  background-color: transparent;
+  color: rgba(32, 37, 40, 0.4);
+}
+.findme__common__toolbar__current-page {
+  flex: 1 1;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+  margin-top: -3px;
+  padding-bottom: 6px;
+}
+.findme__common__toolbar__current-page__number {
+  color: #009b92;
+  font-weight: 700;
+  padding-left: 6px;
+}
+.findme__common__next {
+  margin: 12px 0 17px;
+  width: 100%;
+  text-align: center;
+}
+.findme__common__next__button {
+  width: 138px;
+  background-color: #0057a5;
+  background-color: var(--primary-blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.findme__common__next__button--image {
+  vertical-align: middle;
+  width: 16px;
+  margin: 1px -2px 0 4px;
+}
+.findme__common__header {
+  width: 100%;
+  height: 60px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: -24px 0 12px;
+}
+.findme__common__header > img {
+  height: 24px;
+}
+.findme__common__footer {
+  width: 100%;
+  padding: 50px 0 40px;
+  text-align: center;
+  margin-bottom: -24px;
+}
+.findme__common__footer__call {
+  font-size: 12px;
+  color: #202528;
+  font-weight: 300;
+}
+.invalid-feedback-custom {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+/* 20230219 수정 */
+.findme__result__other {
+  width: 1128px;
+  transform: translateX(-50%);
+  position: relative;
+  left: 50%;
+  padding: 24px;
+}
+.findme__result__other__label {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.3334;
+  word-break: keep-all;
+}
+.findme__result__other__tendency {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px 20px;
+  margin-top: 40px;
+}
+.findme__result__other__tendency dl {
+  flex: none;
+  width: 200px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.findme__result__other__tendency dl dt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+.findme__result__other__tendency dl dt img {
+  max-width: calc(100% - 36px);
+}
+.findme__result__other__tendency dl dd {
+  height: 90px;
+  padding-top: 8px;
+  margin-bottom: 0;
+}
+.findme__result__other__tendency dl:nth-child(1) dd {
+  background-color: #33b8e8;
+}
+.findme__result__other__tendency dl:nth-child(2) dd {
+  background-color: #678557;
+}
+.findme__result__other__tendency dl:nth-child(3) dd {
+  background-color: #445d98;
+}
+.findme__result__other__tendency dl:nth-child(4) dd {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 204, 102, 1) 0%,
+    rgba(58, 183, 252, 1) 50%,
+    rgba(237, 123, 114, 1) 100%
+  );
+}
+.findme__result__other__tendency dl:nth-child(5) dd {
+  background-color: #ff6373;
+}
+.findme__result__other__tendency dl:nth-child(6) dd {
+  background-color: #476091;
+}
+.findme__result__other__tendency dl:nth-child(7) dd {
+  background-color: #e5716e;
+}
+.findme__result__other__tendency dl:nth-child(8) dd {
+  background-color: #e3a450;
+}
+.findme__result__other__tendency dl:nth-child(9) dd {
+  background-color: #47627c;
+}
+.findme__result__other__tendency dl:nth-child(10) dd {
+  background-color: #c3a183;
+}
+.findme__result__other__tendency dl:nth-child(11) dd {
+  background-color: #4c4c4d;
+}
+.findme__result__other__tendency dl:nth-child(12) dd {
+  background-color: #707070;
+}
+.findme__result__other__tendency dl:nth-child(13) dd {
+  background-color: #e5716e;
+}
+.findme__result__other__tendency dl:nth-child(14) dd {
+  background-color: #dbaf00;
+}
+.findme__result__other__tendency dl:nth-child(15) dd {
+  background-color: #664425;
+}
+.findme__result__other__tendency dl dd .tit {
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+}
+.findme__result__other__tendency dl dd .txt {
+  text-align: center;
+  color: #ffffff;
+  line-height: 1.1429;
+  font-size: 14px;
+  margin-top: 7px;
+  word-break: keep-all;
+}
+
+.dim {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 98;
+  background-color: #000000;
+  opacity: 0.5;
+  left: 0;
+  top: 0;
+}
+
+.findme__result__other__detail .swiper-button-next,
+.findme__result__other__detail .swiper-button-prev {
+  width: 60px;
+  height: 60px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  width: calc(var(--swiper-navigation-size) / 44 * 27);
+  height: var(--swiper-navigation-size);
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--swiper-navigation-color, var(--swiper-theme-color));
+}
+.findme__result__other__detail .swiper-button-next {
+  background-size: 100%;
+  right: 0;
+}
+.findme__result__other__detail .swiper-button-prev {
+  background-size: 100%;
+  left: 0;
+}
+.findme__result__other__detail {
+  /* display: none; */
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  z-index: 99;
+  padding: 0 100px;
+}
+.findme__result__other__detail.active {
+  display: block;
+}
+.findme__result__other__detail .swiper-slide {
+  border-radius: 20px;
+  overflow: hidden;
+}
+.findme__result__other__detail__head {
+  padding: 20px 30px;
+  overflow: hidden;
+}
+.findme__result__other__detail__close {
+  position: absolute;
+  right: 110px;
+  top: 10px;
+  width: 40px;
+  height: 40px;
+  background-size: 100%;
+  border: 0;
+  z-index: 2;
+}
+.findme__result__other__detail__num {
+  float: left;
+  font-size: 40px;
+  width: 50px;
+  position: relative;
+  line-height: 1.1;
+  text-align: center;
+  color: #ffffff;
+}
+.findme__result__other__detail__num::after {
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -1px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+.findme__result__other__detail__cont {
+  float: left;
+  width: calc(100% - 50px);
+  padding-left: 20px;
+}
+.findme__result__other__detail__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.5;
+}
+.findme__result__other__detail__subtitle {
+  font-size: 14px;
+  line-height: 1.4286;
+  color: #ffffff;
+}
+.findme__result__other__detail__body {
+  height: 370px;
+  max-height: calc(100vh - 130px);
+  overflow: auto;
+  background-color: #ffffff;
+  display: flex;
+  padding: 30px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.findme__result__other__detail__img {
+  flex: none;
+  width: 164px;
+}
+.findme__result__other__detail__text {
+  flex: 1 0;
+  padding-left: 25px;
+  font-size: 16px;
+  line-height: 1.875;
+  word-break: keep-all;
+}
+
+@media screen and (max-width: 1128px) {
+  .findme__result__other {
+    width: 688px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .findme__result__other__detail {
+    width: 688px;
+    padding: 0 60px;
+  }
+  .findme__result__other__detail__body {
+    height: auto;
+  }
+  .findme__result__other__detail__close {
+    right: 70px;
+  }
+}
+
+@media screen and (max-width: 688px) {
+  .findme__result__other {
+    max-width: 468px;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .findme__result__other__tendency {
+    align-items: stretch;
+    white-space: pre-line;
+  }
+  .findme__result__other__tendency dl {
+    width: calc(50% - 10px);
+    display: flex;
+    flex-direction: column;
+  }
+  .findme__result__other__tendency dl dt {
+    padding-top: 100%;
+    height: 0;
+    position: relative;
+    flex: none;
+  }
+  .findme__result__other__tendency dl dt img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 36px);
+  }
+  .findme__result__other__tendency dl dd {
+    height: auto;
+    padding-bottom: 8px;
+    flex: 1 0;
+  }
+
+  .findme__result__other__detail {
+    width: 100vw;
+    padding: 0 30px;
+  }
+  .findme__result__other__detail__body {
+    flex-direction: column;
+  }
+  .findme__result__other__detail__text {
+    padding-left: 0;
+    padding-top: 25px;
+  }
+  .findme__result__other__detail .swiper-button-next,
+  .findme__result__other__detail .swiper-button-prev {
+    width: 30px;
+    height: 30px;
+  }
+  .findme__result__other__detail__close {
+    right: 40px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* //20230219 수정 */
+/*# sourceMappingURL=main.94fa3c18.chunk.css.map */

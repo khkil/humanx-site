@@ -1,0 +1,80 @@
+.findme__main__title {
+  font-family: GmarketSans, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin-top: 32px;
+  text-align: center;
+}
+
+.findme__main__subtitle {
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: center;
+  padding: 10px;
+  color: #202528;
+}
+
+.findme__main__illustration {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 12px 0 0;
+}
+.findme__main__illustration--icon {
+  vertical-align: middle;
+  margin-top: -3px;
+}
+.findme__main__illustration__text--ask {
+  font-size: 20px;
+  margin: 32px 0 28px;
+  font-weight: 600;
+}
+
+.findme__main__illustration--image {
+  width: 100%;
+  max-width: 156px;
+}
+
+.findme__main__illustration__text--answer {
+  font-size: 14px;
+  margin: 32px 0;
+  font-weight: 600;
+}
+
+.findme__main__start {
+  text-align: center;
+}
+
+.findme__main__start__button {
+  margin: 10px 0 16px;
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.3;
+  padding: 4px 16px 8px;
+  height: 72px;
+  width: 314px;
+  border-radius: 36px;
+  border: none;
+}
+
+.findme__main__start__button__count {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.findme__main__start__disclaimer {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #7E7E7E;
+}
+
+.findme__main__logo__wrapper {
+  padding: 50px 0 30px;
+  text-align: center;
+}
+

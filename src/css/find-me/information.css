@@ -1,0 +1,60 @@
+.findme__info__select, .information_form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.findme__info__select__label {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 0 8px;
+  text-align: left;
+}
+
+.findme__info__select__option {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 8px 0;
+  justify-content: space-between;
+}
+
+.findme__info__select__option__element {
+  min-width: calc(50% - 4px);
+  max-width: calc(50% - 4px);
+  flex: 1;
+}
+
+.findme__info__select__option__element input{
+  display: none;
+}
+
+.findme__info__select__option__button {
+  flex: 1;
+  width: 100%;
+  border: 1px solid rgba(32, 37, 40, 0.26);
+  border-radius: 8px;
+  height: 48px;
+  background-color: transparent;
+  color: rgba(32,37,40,0.5);
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 9px;
+  transition: .25s ease-in-out;
+}
+
+.findme__info__select__option__button.big {
+  height: 73px;
+}
+
+input:checked + .findme__info__select__option__button {
+  background-color: rgba(0,155,146,1);
+  border-color: rgba(0,155,146,1);
+  color: #ffffff;
+}
