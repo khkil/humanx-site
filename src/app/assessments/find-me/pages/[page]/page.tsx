@@ -1,23 +1,23 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { useParams } from 'next/navigation';
-import useAssessmentStore from '@/store/assessment';
+import { Fragment, useMemo, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import ProgressBar from '@/components/ui/ProgressBar';
+import { useParams } from 'next/navigation';
 import useSWR from 'swr';
+import { UserAnswer } from '@/types/user';
+import useAssessmentStore from '@/store/assessment';
+import useUserAnswerStore from '@/store/user';
+import ProgressBar from '@/components/ui/ProgressBar';
+import FindMeLoading from '@/components/find-me/Loading';
 import { fetchAssessmentPagesQuestions, fetchAssessmentUserCount } from '@/service/assessment';
 import { AssessmentPagesQuestion } from '@/types/assessment';
-import FindMeLoading from '@/components/find-me/Loading';
-import { UserAnswer } from '@/types/user';
-import useUserAnswerStore from '@/store/user';
 
 export default function QuestionPage() {
   const { page } = useParams<{ page: string }>();
   const router = useRouter();
 
   const { state } = useAssessmentStore();
-  const { state: userAnswerState, addState } = useUserAnswerStore();
+  const { state: userAnswerState, addState, removeState } = useUserAnswerStore();
 
   const isLastPage: boolean = useMemo(() => state?.totalPage === parseInt(page), [state, page]);
   const percentage: number = useMemo(() => (!state?.totalPage ? 0 : (100 / state?.totalPage) * parseInt(page)), [state, page]);
@@ -30,30 +30,24 @@ export default function QuestionPage() {
     }
   );
 
-  const [answers, setAnswers] = useState<UserAnswer[]>([]);
-
   const goNextPage = () => {
     if (!isLastPage) {
-      addState(answers);
       router.replace(`/assessments/find-me/pages/${parseInt(page) + 1}`);
     }
   };
 
   const onChange = (answer: UserAnswer) => {
-    const index = answers.findIndex(({ questionId }) => questionId == answer.questionId);
+    const index = userAnswerState.findIndex(({ questionId }) => questionId == answer.questionId);
+    const hasAnswer = index > -1;
 
-    if (index < 0) {
-      setAnswers([...answers, answer]);
-    } else {
-      const filteredAnswers = answers.filter(({ questionId }) => questionId == index);
-      setAnswers([...filteredAnswers, answer]);
+    if (hasAnswer) {
+      removeState(index);
     }
+    addState(answer);
   };
 
-  const validate = () => {};
-
   return (
-    <>
+    <Fragment>
       <div className='findme__question__explanation'>
         평소의 <b>나와 가장 가까울 수록 6점에 가깝게,</b>
         <br />
@@ -97,7 +91,7 @@ export default function QuestionPage() {
                     ))}
                   </div>
                   <p className='font-bold text-sm text-red-500 '>
-                    <span className='font-medium'>Oops!</span> Username already taken!
+                    <span className='font-medium'>문항을 체크해주세요.</span>
                   </p>
                 </div>
               ))}
@@ -105,13 +99,13 @@ export default function QuestionPage() {
           </div>
         )}
         {JSON.stringify(userAnswerState)}
-        <div className='findme__common__next'>
-          <button type='submit' className='findme__common__next__button' onClick={goNextPage}>
-            NEXT
-            <img className='findme__common__next__button--image' src={'/images/find-me/icons/next.svg'} alt='next' />
-          </button>
-        </div>
       </div>
-    </>
+      <div className='findme__common__next'>
+        <button type='submit' className='findme__common__next__button' onClick={goNextPage}>
+          NEXT
+          <img className='findme__common__next__button--image' src={'/images/find-me/icons/next.svg'} alt='next' />
+        </button>
+      </div>
+    </Fragment>
   );
 }
