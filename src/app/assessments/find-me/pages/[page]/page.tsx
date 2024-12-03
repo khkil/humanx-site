@@ -10,18 +10,20 @@ import { fetchAssessmentPagesQuestions, fetchAssessmentUserCount } from '@/servi
 import { AssessmentPagesQuestion } from '@/types/assessment';
 import FindMeLoading from '@/components/find-me/Loading';
 import { UserAnswer } from '@/types/user';
+import useUserAnswerStore from '@/store/user';
 
 export default function QuestionPage() {
   const { page } = useParams<{ page: string }>();
   const router = useRouter();
 
   const { state } = useAssessmentStore();
+  const { state: userAnswerState, addState } = useUserAnswerStore();
 
   const isLastPage: boolean = useMemo(() => state?.totalPage === parseInt(page), [state, page]);
   const percentage: number = useMemo(() => (!state?.totalPage ? 0 : (100 / state?.totalPage) * parseInt(page)), [state, page]);
 
   const { data, isLoading } = useSWR<AssessmentPagesQuestion[], Error>(
-    'assessmentUserCount',
+    'assessmentQuestions',
     () => fetchAssessmentPagesQuestions(1, parseInt(page)),
     {
       revalidateOnFocus: false,
@@ -32,6 +34,7 @@ export default function QuestionPage() {
 
   const goNextPage = () => {
     if (!isLastPage) {
+      addState(answers);
       router.replace(`/assessments/find-me/pages/${parseInt(page) + 1}`);
     }
   };
@@ -70,7 +73,7 @@ export default function QuestionPage() {
               </div>
             </div>
             <div className='findme__question__element'>
-              {data?.map(({ questionId, questionTitle, answers }, index) => (
+              {data?.map(({ questionId, questionTitle, answers }) => (
                 <div key={questionId} className='findme__question__element__label mb-10'>
                   {questionTitle}
                   <div className='findme__question__element__options'>
@@ -101,7 +104,13 @@ export default function QuestionPage() {
             </div>
           </div>
         )}
-        {JSON.stringify(answers)}
+        {JSON.stringify(userAnswerState)}
+        <div className='findme__common__next'>
+          <button type='submit' className='findme__common__next__button' onClick={goNextPage}>
+            NEXT
+            <img className='findme__common__next__button--image' src={'/images/find-me/icons/next.svg'} alt='next' />
+          </button>
+        </div>
       </div>
     </>
   );

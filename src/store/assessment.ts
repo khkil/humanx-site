@@ -2,16 +2,14 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { AssessmentDetail } from '@/types/assessment';
 
-const StorageKey = 'storage-key';
-
-interface State {
+interface AssessmentState {
   state: AssessmentDetail | null;
   setState: (state: AssessmentDetail) => void;
   clear: () => void;
 }
 
 const useAssessmentStore = create(
-  persist<State>(
+  persist<AssessmentState>(
     (set) => ({
       state: null,
       setState: (state: AssessmentDetail) => {
@@ -20,7 +18,7 @@ const useAssessmentStore = create(
       clear: () => set({ state: null }),
     }),
     {
-      name: StorageKey,
+      name: 'assessment-storage-key',
       storage: createJSONStorage(() => sessionStorage),
     }
   )
