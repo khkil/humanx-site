@@ -59,7 +59,7 @@ export default function FindMeStartPage() {
         <div className='findme__main__illustration__text--answer'>“네, 당신을 찾아드릴게요. 검사를 시작하세요.”</div>
       </div>
       <div className='findme__main__start'>
-        <Link href={'/assessments/find-me/pages/1'}>
+        <Link href={'/assessments/find-me/agree'}>
           <button className='findme__main__start__button'>
             시작하기
             <br />

@@ -10,6 +10,7 @@ import ProgressBar from '@/components/ui/ProgressBar';
 import { fetchAssessmentPagesQuestions } from '@/service/assessment';
 import { AssessmentPagesQuestion } from '@/types/assessment';
 import FindMeLoading from '@/components/ui/Loading';
+import ErrorMessage from '@/components/ui/InvalidMessage';
 
 export default function QuestionPage() {
   const { page } = useParams<{ page: string }>();
@@ -126,11 +127,7 @@ export default function QuestionPage() {
                       </div>
                     ))}
                   </div>
-                  {errors.get(`question_${questionId}`) && (
-                    <p className='font-bold text-sm text-red-500 '>
-                      <span className='font-medium'>문항을 체크해주세요.</span>
-                    </p>
-                  )}
+                  {errors.get(`question_${questionId}`) && <ErrorMessage text={'문항을 체크해주세요.'} />}
                 </div>
               ))}
             </div>
