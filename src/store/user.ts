@@ -17,8 +17,8 @@ const useUserAnswerStore = create(
       addState: (state: UserAnswer) => {
         set({ state: [...get().state, state] });
       },
-      removeState: (index: number) => {
-        set({ state: [...get().state.filter((_, i) => i !== index)] });
+      removeState: (questionId: number) => {
+        set({ state: [...get().state.filter((answer) => answer.questionId !== questionId)] });
       },
       clear: () => set({ state: [] }),
     }),
