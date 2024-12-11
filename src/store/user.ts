@@ -1,32 +1,25 @@
-import { create } from 'zustand';
+import { User, UserAnswer } from '@/types/user';
+import { create } from 'zustand/index';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { AssessmentDetail } from '@/types/assessment';
-import { UserAnswer } from '@/types/user';
 
-interface UserAnswerState {
-  state: UserAnswer[];
-  addState: (state: UserAnswer) => void;
-  removeState: (index: number) => void;
-  clear: () => void;
+interface UserState {
+  state: User | null;
+  setState: (state: User) => void;
 }
 
-const useUserAnswerStore = create(
-  persist<UserAnswerState>(
+const useUserStore = create(
+  persist<UserState>(
     (set, get) => ({
-      state: [],
-      addState: (state: UserAnswer) => {
-        set({ state: [...get().state, state] });
+      state: null, // {"userName":"test","userBirth":"111111","userEmail":"test@naver.com","userPhone":"1"},
+      setState: (user: User) => {
+        set({ state: user });
       },
-      removeState: (questionId: number) => {
-        set({ state: [...get().state.filter((answer) => answer.questionId !== questionId)] });
-      },
-      clear: () => set({ state: [] }),
     }),
     {
-      name: 'assessment-question-storage-key',
+      name: 'user-storage-key',
       storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
 
-export default useUserAnswerStore;
+export default useUserStore;

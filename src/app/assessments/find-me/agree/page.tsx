@@ -13,6 +13,9 @@ import TermsList from '@/components/find-me/agree/TermsList';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import InvalidMessage from '@/components/ui/InvalidMessage';
+import { User } from '@/types/user';
+import useUserStore from '@/store/user';
+import FindMeLoading from '@/components/ui/Loading';
 
 const formData: { title: string; type: string; name: string }[] = [
   {
@@ -22,7 +25,7 @@ const formData: { title: string; type: string; name: string }[] = [
   },
   {
     title: '생년월일',
-    type: 'date',
+    type: 'text',
     name: 'userBirth',
   },
   {
@@ -42,7 +45,9 @@ export default function PrivacyTermsAgreePage() {
     revalidateOnFocus: false,
   });
 
-  const initialValues = { userName: '', userBirth: '', userEmail: '', userPhone: '' };
+  const { state, setState } = useUserStore();
+
+  const initialValues: User = { userName: '', userBirth: '', userEmail: '', userPhone: '' };
 
   const validationSchema = Yup.object().shape({
     userName: Yup.string().required('이름을 입력해주세요.'),
@@ -53,14 +58,13 @@ export default function PrivacyTermsAgreePage() {
 
   const router = useRouter();
 
-  const [agreed, setAgreed] = useState<boolean>(true);
+  const [agreed, setAgreed] = useState<boolean>(false);
 
   const onClickAgree = () => {
-    //router.push('/assessments/find-me/pages/1');
+    router.push('/assessments/find-me/pages/1');
   };
 
-  console.log(data);
-  if (isLoading || !data) return null;
+  if (isLoading || !data) return <FindMeLoading />;
 
   return (
     <Fragment>
@@ -75,7 +79,8 @@ export default function PrivacyTermsAgreePage() {
           <Formik
             initialValues={initialValues}
             onSubmit={(values) => {
-              console.log(values);
+              setState(values);
+              onClickAgree();
             }}
             validationSchema={validationSchema}
           >
@@ -101,7 +106,10 @@ export default function PrivacyTermsAgreePage() {
                   </div>
                 ))}
                 {JSON.stringify(values)}
+                <br />
                 {JSON.stringify(errors)}
+                <br />
+                {JSON.stringify(state)}
                 <div className='findme__common__next'>
                   <button type='submit' className='findme__common__next__button'>
                     NEXT

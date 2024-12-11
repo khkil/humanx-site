@@ -38,7 +38,9 @@ export default function FindMeStartPage() {
 
   useEffect(() => {
     if (assessmentDetail) {
-      setState(assessmentDetail);
+      console.log(setState);
+      console.log(assessmentDetail);
+      //setState(assessmentDetail);
     }
   }, [assessmentDetail]);
 
