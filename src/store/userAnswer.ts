@@ -13,8 +13,8 @@ interface UserAnswerState {
 const useUserAnswerStore = create(
   persist<UserAnswerState>(
     (set, get) => ({
-      state: [],
-      /*[
+      // state: [],
+      state: [
         { questionId: 1, answerId: 1 },
         { questionId: 2, answerId: 10 },
         { questionId: 3, answerId: 17 },
@@ -60,7 +60,7 @@ const useUserAnswerStore = create(
         { questionId: 43, answerId: 303 },
         { questionId: 44, answerId: 311 },
         { questionId: 45, answerId: 318 },
-      ],*/
+      ],
       addState: (state: UserAnswer) => {
         set({ state: [...get().state, state] });
       },

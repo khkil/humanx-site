@@ -11,7 +11,8 @@ interface AssessmentState {
 const useAssessmentStore = create(
   persist<AssessmentState>(
     (set) => ({
-      state: null, // {"assessmentName":"나를 찾아줘","totalPage":15}
+      //state: null,
+      state: { assessmentName: '나를 찾아줘', totalPage: 15 },
       setState: (state: AssessmentDetail) => {
         set({ state });
       },

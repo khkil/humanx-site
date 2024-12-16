@@ -12,13 +12,16 @@ import { AssessmentPagesQuestion } from '@/types/assessment';
 import FindMeLoading from '@/components/ui/Loading';
 import ErrorMessage from '@/components/ui/InvalidMessage';
 import useUserStore from '@/store/user';
+import { insertUser } from '@/service/user';
+import { Analyzing } from '@/components/find-me/Analyzing';
+import { DEFAULT_ERROR_MESSAGE } from '@/constants';
 
 export default function QuestionPage() {
   const { page } = useParams<{ page: string }>();
   const router = useRouter();
 
   const { state: assessment } = useAssessmentStore();
-  const { state: user } = useUserStore();
+  const { state: user, setState } = useUserStore();
   const { state: userAnswers, addState, removeState } = useUserAnswerStore();
 
   const { data, isLoading } = useSWR<AssessmentPagesQuestion[], Error>(
@@ -33,6 +36,7 @@ export default function QuestionPage() {
   const percentage: number = useMemo(() => (!assessment?.totalPage ? 0 : (100 / assessment?.totalPage) * parseInt(page)), [assessment, page]);
 
   const [errors, setErrors] = useState<Map<string, boolean>>(new Map<string, boolean>());
+  const [analyzing, setAnalyzing] = useState<boolean>(false);
 
   const onChange = (answer: UserAnswer) => {
     const index = userAnswers.findIndex(({ questionId }) => questionId == answer.questionId);
@@ -47,19 +51,33 @@ export default function QuestionPage() {
     addState(answer);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!checkValidate()) {
       return;
     }
     if (!isLastPage) {
       router.replace(`/assessments/find-me/pages/${parseInt(page) + 1}`);
     } else {
-      const params = {
+      setAnalyzing(true);
+
+      const params: User = {
         ...user,
         userAnswers,
       };
 
-      console.log(JSON.stringify(params));
+      setTimeout(async () => {
+        try {
+          const { encryptedUserId } = await insertUser(params);
+
+          setState({ ...user, encryptedUserId });
+          router.replace(`/assessments/find-me/pages/result?userId=${encryptedUserId}`);
+        } catch (error) {
+          alert(DEFAULT_ERROR_MESSAGE + ' 관리자에게 문의해주세요.');
+          console.error(error);
+        } finally {
+          setAnalyzing(false);
+        }
+      }, 3000);
     }
   };
 
@@ -87,62 +105,67 @@ export default function QuestionPage() {
 
   return (
     <Fragment>
-      <div className='findme__question__explanation'>
-        평소의 <b>나와 가장 가까울 수록 6점에 가깝게,</b>
-        <br />
-        평소의 <b>나와 같지 않을 수록 1점에 가깝게</b> 체크하세요.
-      </div>
-
       <div className='findme__question__wrapper'>
-        {isLoading ? (
-          <div className={'h-64'}>
-            <FindMeLoading />
-          </div>
+        {analyzing ? (
+          <Analyzing />
         ) : (
-          <div>
-            <div className='findme__common__toolbar'>
-              <div className='w-full bg-gray-200 rounded-full h-2.5'>
-                <ProgressBar percentage={percentage} />
+          <>
+            <div className='findme__question__explanation'>
+              평소의 <b>나와 가장 가까울 수록 6점에 가깝게,</b>
+              <br />
+              평소의 <b>나와 같지 않을 수록 1점에 가깝게</b> 체크하세요.
+            </div>
+            {isLoading ? (
+              <div className={'h-64'}>
+                <FindMeLoading />
               </div>
-            </div>
-            <div className='findme__question__element'>
-              {data?.map(({ questionId, questionTitle, answers }) => (
-                <div key={questionId} className='findme__question__element__label mb-10'>
-                  {questionTitle}
-                  <div className='findme__question__element__options'>
-                    {answers.map(({ answerId, answerTitle }, index) => (
-                      <div key={answerId} className='findme__question__element__option'>
-                        <label className='findme__question__element__option' htmlFor={`answer_${answerId}`}>
-                          <input
-                            type='radio'
-                            id={`answer_${answerId}`}
-                            name={`question_${questionId}`}
-                            value={answerId}
-                            onChange={() => {
-                              onChange({ questionId, answerId });
-                            }}
-                            required
-                          />
-                          <div className='findme__question__element__option-Checker'></div>
-                          {answerTitle}
-                        </label>
-                      </div>
-                    ))}
+            ) : (
+              <div>
+                <div className='findme__common__toolbar'>
+                  <div className='w-full bg-gray-200 rounded-full h-2.5'>
+                    <ProgressBar percentage={percentage} />
                   </div>
-                  {errors.get(`question_${questionId}`) && <ErrorMessage text={'문항을 체크해주세요.'} />}
                 </div>
-              ))}
+                <div className='findme__question__element'>
+                  {data?.map(({ questionId, questionTitle, answers }) => (
+                    <div key={questionId} className='findme__question__element__label mb-10'>
+                      {questionTitle}
+                      <div className='findme__question__element__options'>
+                        {answers.map(({ answerId, answerTitle }, index) => (
+                          <div key={answerId} className='findme__question__element__option'>
+                            <label className='findme__question__element__option' htmlFor={`answer_${answerId}`}>
+                              <input
+                                type='radio'
+                                id={`answer_${answerId}`}
+                                name={`question_${questionId}`}
+                                value={answerId}
+                                onChange={() => {
+                                  onChange({ questionId, answerId });
+                                }}
+                                required
+                              />
+                              <div className='findme__question__element__option-Checker'></div>
+                              {answerTitle}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                      {errors.get(`question_${questionId}`) && <ErrorMessage text={'문항을 체크해주세요.'} />}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {JSON.stringify(userAnswers)}
+            {JSON.stringify(user)}
+            <div className='findme__common__next'>
+              <button type='submit' className='findme__common__next__button' onClick={handleSubmit}>
+                NEXT
+                <img className='findme__common__next__button--image' src={'/images/find-me/icons/next.svg'} alt='next' />
+              </button>
             </div>
-          </div>
+          </>
         )}
-        {JSON.stringify(userAnswers)}
-        {JSON.stringify(user)}
-      </div>
-      <div className='findme__common__next'>
-        <button type='submit' className='findme__common__next__button' onClick={handleSubmit}>
-          NEXT
-          <img className='findme__common__next__button--image' src={'/images/find-me/icons/next.svg'} alt='next' />
-        </button>
       </div>
     </Fragment>
   );
